@@ -19,8 +19,8 @@ const PORT = process.env.PORT || 5000;
 
 // CORS
 const allowedOrigins = [
-  'http://localhost:3000',
-  'https://fleetflow-eosin.vercel.app', // your Vercel frontend
+  "http://localhost:3000",
+  "https://fleet-flow-eosin.vercel.app",
 ];
 
 app.use(
