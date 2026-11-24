@@ -18,9 +18,21 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 // CORS
+const allowedOrigins = [
+  'http://localhost:3000',
+  'https://fleetflow-eosin.vercel.app', // your Vercel frontend
+];
+
 app.use(
   cors({
-    origin: "http://localhost:3000",
+    origin: (origin: string | undefined, callback: (err: Error | null, allow?: boolean) => void) => {
+      if (!origin) return callback(null, true);
+      if (!allowedOrigins.includes(origin)) {
+        return callback(new Error('The CORS policy for this site does not allow access from the specified Origin.'), false);
+      }
+      return callback(null, true);
+    },
+    credentials: true,
   })
 );
 

@@ -19,6 +19,7 @@ export default function DashboardOverview() {
 
   useEffect(() => {
     fetchStats();
+    
   }, []);
 
   const fetchStats = async () => {
