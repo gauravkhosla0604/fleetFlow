@@ -25,17 +25,15 @@ const allowedOrigins = [
 
 app.use(
   cors({
-    origin: (origin: string | undefined, callback: (err: Error | null, allow?: boolean) => void) => {
-      if (!origin) return callback(null, true);
-      if (!allowedOrigins.includes(origin)) {
-        return callback(new Error('The CORS policy for this site does not allow access from the specified Origin.'), false);
+    origin: (origin, callback) => {
+      if (!origin || allowedOrigins.includes(origin)) {
+        return callback(null, true);
       }
-      return callback(null, true);
+      return callback(null, false);
     },
     credentials: true,
   })
 );
-
 // BODY PARSERS
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
